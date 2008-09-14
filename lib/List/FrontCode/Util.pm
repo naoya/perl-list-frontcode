@@ -39,10 +39,10 @@ sub front_encode ($$) {
         $nmatch++;
     }
 
-    ## $prev ¤È¤Î°ìÃ×ÉôÊ¬¤òºï½ü
+    ## $prev ã¨ã®ä¸€è‡´éƒ¨åˆ†ã‚’å‰Šé™¤
     substr($cur, 0, $nmatch) = '';
 
-    ## °ìÃ×Ä¹¡¢»Ä¤ê¤ÎÄ¹¤µ¡¢ÉÔ°ìÃ×ÉôÊ¬¤ò½ĞÎÏ
+    ## ä¸€è‡´é•·ã€æ®‹ã‚Šã®é•·ã•ã€ä¸ä¸€è‡´éƒ¨åˆ†ã‚’å‡ºåŠ›
     $out .= encode_vb $nmatch;
     $out .= encode_vb length $cur;
     $out .= $cur;
@@ -56,10 +56,10 @@ sub front_decodex ($$) {
     my $nmatch = decode_vbx($in);
     my $nrest  = decode_vbx($in);
 
-    ## Á°Í×ÁÇ¤È¤Î°ìÃ×ÉôÊ¬¡¢»Ä¤êÉôÊ¬¤òÀÜÂ³¤·¤ÆÉü¸µ
+    ## å‰è¦ç´ ã¨ã®ä¸€è‡´éƒ¨åˆ†ã€æ®‹ã‚Šéƒ¨åˆ†ã‚’æ¥ç¶šã—ã¦å¾©å…ƒ
     my $cur = sprintf "%s%s", substr($prev, 0, $nmatch), substr($$in, 0, $nrest);
 
-    ## ÆÉ¤ß½Ğ¤·¤¿Ê¬ºï¤ë
+    ## èª­ã¿å‡ºã—ãŸåˆ†å‰Šã‚‹
     substr($$in, 0, $nrest) = '';
 
     return $cur;
